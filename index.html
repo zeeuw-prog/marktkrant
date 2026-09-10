@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marktkrant GGiN Sint-Annaland</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="enhancements.css" />
+    <link rel="stylesheet" href="confirmation.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#catalogus"><span>MARKT</span>KRANT <small>GGIN SINT-ANNALAND</small></a>
+      <nav><a href="#catalogus">Assortiment</a><a href="doelen.html">Doelen</a><a href="#zo-werkt-het">Zo werkt het</a><button class="admin-link" id="adminToggle">Beheer</button></nav>
+      <button class="cart-button" id="cartToggle" aria-label="Winkelmand openen">Mandje <span id="cartCount">0</span></button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">MARKTKRANT 2026</p>
+          <h1>Een mooie markt,<br><em>gewoon bij u thuis.</em></h1>
+          <p class="hero-copy">Bestel uw favoriete artikelen online. Wij bezorgen binnen de gemeente Tholen, of u haalt uw bestelling op.</p>
+          <a class="primary-button" href="#catalogus">Bekijk de markt</a>
+        </div>
+        <aside class="deadline-card">
+          <p>Bestellen kan t/m</p><strong id="orderDeadline">nog te bepalen</strong>
+          <hr><p>Bezorgen & afhalen</p><strong id="eventDate">datum volgt</strong><p class="pickup-location-label">Afhaallocatie</p><strong id="pickupLocation">locatie volgt</strong><p class="pickup-location-label">Afhaalperiode</p><strong id="pickupTime">tijd volgt</strong>
+          <small>De opbrengst komt ten goede aan onze gemeente.</small>
+        </aside>
+      </section>
+
+      <section class="catalog-section" id="catalogus">
+        <div class="section-heading"><div><p class="eyebrow">ASSORTIMENT</p><h2>Ontdek de markt</h2></div><p id="productTotal" class="muted"></p></div>
+        <div class="category-filters" id="categoryFilters"></div>
+        <aside class="sponsor-card" id="sponsorCard" hidden></aside>
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+
+      <section class="how" id="zo-werkt-het">
+        <p class="eyebrow">EENVOUDIG BESTELLEN</p><h2>Zo werkt het</h2>
+        <div class="steps"><div><b>1</b><h3>Kies uw artikelen</h3><p>Voeg artikelen toe aan uw mandje.</p></div><div><b>2</b><h3>Kies bezorgen of afhalen</h3><p>Bezorgen in Tholen kost € 4,00.</p></div><div><b>3</b><h3>Rond uw bestelling af</h3><p>U kiest Tikkie of contante betaling.</p></div></div>
+      </section>
+    </main>
+
+    <aside class="side-panel" id="cartPanel" aria-hidden="true">
+      <div class="panel-header"><h2>Uw mandje</h2><button class="icon-button" data-close="cartPanel">×</button></div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-footer"><div class="cart-subtotal"><span>Subtotaal</span><strong id="cartSubtotal">€ 0,00</strong></div><button class="primary-button wide" id="checkoutStart">Bestelling afronden</button></div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <dialog id="checkoutDialog">
+      <form id="checkoutForm">
+        <div class="dialog-head"><div><p class="eyebrow">UW GEGEVENS</p><h2>Bestelling afronden</h2></div><button class="icon-button" type="button" data-close="checkoutDialog">×</button></div>
+        <div class="form-grid"><label>Naam<input required name="name" autocomplete="name"></label><label>Telefoonnummer<input required name="phone" type="tel" autocomplete="tel"></label><label class="full">Adres<input required name="address" autocomplete="street-address"></label><label>Postcode<input required name="postal" autocomplete="postal-code"></label><label>Woonplaats<input required name="city" value="" autocomplete="address-level2"></label><label class="full">E-mailadres <small>Optioneel, voor een bevestiging per e-mail</small><input name="email" type="email" autocomplete="email"></label></div>
+        <fieldset><legend>Ontvangst</legend><label class="choice"><input type="radio" name="fulfilment" value="delivery" checked> <span><b>Bezorgen binnen gemeente Tholen</b><small>€ 4,00 bezorgkosten</small></span></label><label class="choice"><input type="radio" name="fulfilment" value="pickup"> <span><b>Afhalen</b><small id="pickupDetails">Op datum en locatie die nog worden bekendgemaakt</small></span></label></fieldset>
+        <fieldset><legend>Betaling</legend><label class="choice"><input type="radio" name="payment" value="tikkie" checked> <span><b>Ik ontvang graag een Tikkie</b><small>Wij sturen na de sluitingsdatum een betaalverzoek.</small></span></label><label class="choice"><input type="radio" name="payment" value="cash"> <span><b>Ik betaal contant</b><small>Bij aflevering of bij het afhalen.</small></span></label></fieldset>
+        <label id="tikkieField">Telefoonnummer voor Tikkie <small>(laat leeg als dit hetzelfde nummer is)</small><input name="tikkiePhone" type="tel"></label>
+        <label>Opmerking <textarea name="note" rows="2" placeholder="Bijvoorbeeld: graag bij de achterdeur afgeven"></textarea></label>
+        <div class="order-total"><span>Totaalbedrag</span><strong id="checkoutTotal">€ 0,00</strong></div><button class="primary-button wide" type="submit">Bestelling versturen</button>
+        <p class="privacy">Uw gegevens worden uitsluitend gebruikt voor deze bestelling en bezorging.</p>
+      </form>
+    </dialog>
+
+    <dialog id="confirmationDialog"><div class="confirmation"><p class="eyebrow">BEDANKT</p><h2>Uw bestelling is ontvangen.</h2><p id="confirmationText"></p><div class="confirmation-summary" id="confirmationSummary"></div><button class="primary-button wide" data-close="confirmationDialog">Terug naar de markt</button></div></dialog>
+
+    <dialog id="adminLoginDialog"><form id="adminLoginForm"><div class="dialog-head"><div><p class="eyebrow">ALLEEN VOOR DE ORGANISATIE</p><h2>Beheer openen</h2></div><button class="icon-button" type="button" data-close="adminLoginDialog">×</button></div><p class="login-copy">Voer de beheercode in om artikelen, categorieën en bestellingen te beheren.</p><label>Beheercode<input required name="password" type="password" autocomplete="current-password" autofocus></label><label class="remember"><input name="remember" type="checkbox" checked> <span>Ingelogd blijven op dit apparaat</span></label><p class="login-error" id="loginError"></p><button class="primary-button wide" type="submit">Inloggen</button><p class="privacy">Dit is een lokale proefversie. Voor publicatie krijgt de echte site een beveiligde beheerlogin op de server.</p></form></dialog>
+    <dialog id="adminDialog" class="admin-dialog">
+      <div class="dialog-head"><div><p class="eyebrow">ALLEEN VOOR DE ORGANISATIE</p><h2>Beheer marktkrant</h2></div><button class="icon-button" data-close="adminDialog">×</button></div>
+      <div class="admin-tabs"><button class="active" data-tab="products">Artikelen</button><button data-tab="categories">Categorieën</button><button data-tab="goals">Doelen</button><button data-tab="general">Algemeen</button><button data-tab="orders">Bestellingen</button></div>
+      <section class="admin-panel active" id="productsTab"><div class="admin-action"><p>Voeg artikelen toe, wijzig prijzen of kies een afbeelding.</p><button class="primary-button" id="newProduct">Nieuw artikel</button></div><div id="adminProducts"></div></section>
+      <section class="admin-panel" id="categoriesTab"><div class="admin-action"><p>Pas de indeling van de markt aan en voeg per categorie een sponsorvermelding toe.</p><button class="primary-button" id="newCategory">Nieuwe categorie</button></div><div id="adminCategories"></div></section>
+      <section class="admin-panel" id="goalsTab"><div class="admin-action"><p>Beheer de tekst van Doel 1 en Doel 2. Doel 2 heeft ook een eigen informatiepagina.</p></div><div id="adminGoals"></div></section>
+      <section class="admin-panel" id="generalTab"><div class="admin-action"><p>Pas de belangrijke data en afhaalinformatie aan.</p></div><form id="generalForm"><div class="edit-grid"><label>Uiterste besteldatum<input required name="deadline" type="date"></label><label>Bezorg- en afhaaldatum<input required name="eventDate" type="date"></label><label>Afhaallocatie<input required name="pickupLocation" placeholder="bijv. Bosweg 7, Sint-Annaland"></label><label>Afhaalperiode <small>Optioneel, bijvoorbeeld: 10.00–11.00 uur</small><input name="pickupTime" placeholder="bijv. 10.00–11.00 uur"></label></div><button class="primary-button" type="submit">Gegevens opslaan</button></form></section>
+      <section class="admin-panel" id="ordersTab"><div class="admin-action"><p>In deze proefversie blijven bestellingen in deze browser bewaard.</p><button class="secondary-button" id="exportOrders">Download CSV</button></div><div id="adminOrders"></div></section>
+    </dialog>
+    <dialog id="editDialog"><form id="editForm"><div class="dialog-head"><h2 id="editTitle">Artikel bewerken</h2><button class="icon-button" type="button" data-close="editDialog">×</button></div><div id="editFields"></div><button class="primary-button wide" type="submit">Opslaan</button></form></dialog>
+    <script src="goals-data.js"></script><script src="catalog-2025.js"></script><script src="app.js"></script>
+  </body>
+</html>
